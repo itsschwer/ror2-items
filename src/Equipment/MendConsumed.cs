@@ -121,7 +121,7 @@ namespace itsschwer.Items
 
             for (int i = 0; i < items.Length; i++) {
                 int count = inventory.GetItemCount(items[i].consumed);
-                inventory.RemoveItem(items[i].consumed);
+                inventory.RemoveItem(items[i].consumed, count);
                 if (items[i].original) {
                     inventory.GiveItem(items[i].original, count);
                     if (count > 0) CharacterMasterNotificationQueue.SendTransformNotification(notificationTarget, items[i].consumed.itemIndex, items[i].original.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
