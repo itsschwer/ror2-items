@@ -16,7 +16,7 @@ to add items that synergise with existing game mechanics, maybe (and without dil
     - *Restores broken, consumed, and empty items. Transforms on use.*\
     \
     <span style="color: #95cde5;">Restores</span> broken, consumed, and empty items back into their <span style="color: #e5c962;">original forms</span>. Does not affect items that can regenerate. Equipment <span style="color: #95cde5;">transforms</span> into a <span style="color: #e5c962;">random equipment</span> when depleted.
-        - "Depleted" is similar to "used", except synergises with *Fuel Cells* *(i.e. only consumed when all equipment charges are used)*
+        - "Depleted" is similar to "used", except synergises with *Fuel Cells* *(i.e. only triggers when all equipment charges are used)*
         - Affected items:
             - *Dio's Best Friend*
             - *Pluripotent Larva* — becomes non-void if restoring alongside *Dio's Best Friend*
@@ -31,4 +31,4 @@ to add items that synergise with existing game mechanics, maybe (and without dil
 
 ## notes
 - uses unused game assets for sprites and icons
-    - ∴ the sprite outline for *Replenisher (`MendConsumed`)* indicates that the equipment is Lunar, even though it isn't
+    - ∴ the sprite outline for *Replenisher (`MendConsumed`)* suggests that the equipment is Lunar, even though it isn't
