@@ -42,8 +42,8 @@ namespace itsschwer.Items
 
             ItemAPI.Add(new CustomEquipment(equipmentDef, (ItemDisplayRule[])null));
             LanguageAPI.Add(equipmentDef.nameToken, "Replenisher");
-            LanguageAPI.Add(equipmentDef.pickupToken, "Restores broken, consumed, and empty items. Consumed on use.");
-            LanguageAPI.Add(equipmentDef.descriptionToken, "<style=cIsUtility>Restores</style> broken, consumed, and empty items back into their original forms. Does not affect items that can regenerate. Equipment is <style=cIsUtility>consumed</style> when depleted.");
+            LanguageAPI.Add(equipmentDef.pickupToken, "Restores broken, consumed, and empty items. Transforms on use.");
+            LanguageAPI.Add(equipmentDef.descriptionToken, "<style=cIsUtility>Restores</style> broken, consumed, and empty items back into their <style=cIsDamage>original forms</style>. Does not affect items that can regenerate. Equipment <style=cIsUtility>transforms</style> into a <style=cIsDamage>random equipment</style> when depleted.");
             ApplyIL();
         }
 
@@ -99,10 +99,11 @@ namespace itsschwer.Items
             Inventory inventory = equipmentSlot.characterBody?.inventory;
             if (!inventory) return false;
 
-            // Become consumed when fully depeleted
+            // Transform into a random equipment when fully depleted
             if (equipmentSlot.stock <= 1) {
-                CharacterMasterNotificationQueue.SendTransformNotification(equipmentSlot.characterBody.master, equipmentSlot.characterBody.inventory.currentEquipmentIndex, DLC1Content.Equipment.BossHunterConsumed.equipmentIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                equipmentSlot.characterBody.inventory.SetEquipmentIndex(DLC1Content.Equipment.BossHunterConsumed.equipmentIndex);
+                EquipmentIndex randomEquipment = PickupCatalog.GetPickupDef(Run.instance.availableEquipmentDropList[UnityEngine.Random.Range(0, Run.instance.availableEquipmentDropList.Count)])?.equipmentIndex ?? EquipmentIndex.None;
+                CharacterMasterNotificationQueue.SendTransformNotification(equipmentSlot.characterBody.master, equipmentSlot.characterBody.inventory.currentEquipmentIndex, randomEquipment, CharacterMasterNotificationQueue.TransformationType.Default);
+                equipmentSlot.characterBody.inventory.SetEquipmentIndex(randomEquipment);
             }
 
             RestoreConsumedItems(inventory, equipmentSlot.characterBody.master);

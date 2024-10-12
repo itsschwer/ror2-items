@@ -13,9 +13,9 @@ to add items that synergise with existing game mechanics, maybe (and without dil
 ### equipment
 1. ***Replenisher***
     - 15s cooldown
-    - *Restores broken, consumed, and empty items. Consumed on use.*\
+    - *Restores broken, consumed, and empty items. Transforms on use.*\
     \
-    <span style="color: #95cde5;">Restores</span> broken, consumed, and empty items back into their original forms. Does not affect items that can regenerate. Equipment is <span style="color: #95cde5;">consumed</span> when depleted.
+    <span style="color: #95cde5;">Restores</span> broken, consumed, and empty items back into their <span style="color: #e5c962;">original forms</span>. Does not affect items that can regenerate. Equipment <span style="color: #95cde5;">transforms</span> into a <span style="color: #e5c962;">random equipment</span> when depleted.
         - "Depleted" is similar to "used", except synergises with *Fuel Cells* *(i.e. only consumed when all equipment charges are used)*
         - Affected items:
             - *Dio's Best Friend*
