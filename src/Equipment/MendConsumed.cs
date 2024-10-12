@@ -94,13 +94,13 @@ namespace itsschwer.Items
             Inventory inventory = equipmentSlot.characterBody?.inventory;
             if (!inventory) return false;
 
-            RestoreConsumedItems(inventory, equipmentSlot.characterBody.master);
-
             // Become consumed when fully depeleted
             if (equipmentSlot.stock <= 1) {
                 CharacterMasterNotificationQueue.SendTransformNotification(equipmentSlot.characterBody.master, equipmentSlot.characterBody.inventory.currentEquipmentIndex, DLC1Content.Equipment.BossHunterConsumed.equipmentIndex, CharacterMasterNotificationQueue.TransformationType.Default);
                 equipmentSlot.characterBody.inventory.SetEquipmentIndex(DLC1Content.Equipment.BossHunterConsumed.equipmentIndex);
             }
+
+            RestoreConsumedItems(inventory, equipmentSlot.characterBody.master);
 
             return true;
         }
@@ -118,8 +118,10 @@ namespace itsschwer.Items
             for (int i = 0; i < items.Length; i++) {
                 int count = inventory.GetItemCount(items[i].consumed);
                 inventory.RemoveItem(items[i].consumed);
-                inventory.GiveItem(items[i].original, count);
-                CharacterMasterNotificationQueue.SendTransformNotification(notificationTarget, items[i].consumed.itemIndex, items[i].original.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+                if (items[i].original) {
+                    inventory.GiveItem(items[i].original, count);
+                    if (count > 0) CharacterMasterNotificationQueue.SendTransformNotification(notificationTarget, items[i].consumed.itemIndex, items[i].original.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+                }
             }
         }
     }
