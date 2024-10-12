@@ -1,5 +1,4 @@
 using BepInEx;
-using RoR2;
 
 namespace itsschwer.Items
 {
@@ -18,6 +17,8 @@ namespace itsschwer.Items
         {
             // This plugin's Plugin.Name is the same as Plugin.GUID
             Logger = base.Logger;
+
+            MendConsumed.Init();
 
             Logger.LogMessage("~awake.");
         }
