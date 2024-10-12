@@ -105,6 +105,8 @@ namespace itsschwer.Items
             EffectData effectData = new EffectData { origin = equipmentSlot.characterBody.transform.position };
             effectData.SetNetworkedObjectReference(equipmentSlot.characterBody.gameObject);
             EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HealingPotionEffect"), effectData, transmit: true);
+            EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/DelicateWatchProcEffect"), effectData, transmit: true);
+            // Probably should cache effects, but why does HealthComponent.AssetReferences have a field for Delicate Watch but not Power Elixir??
 
             return true;
         }
