@@ -36,7 +36,7 @@ namespace itsschwer.Items
             equipmentDef.requiredExpansion = null;
             equipmentDef.unlockableDef = null;
 
-            equipmentDef.cooldown = 1;
+            equipmentDef.cooldown = 15;
 
             ItemAPI.Add(new CustomEquipment(equipmentDef, (ItemDisplayRule[])null));
             ApplyIL();
