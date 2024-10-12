@@ -88,7 +88,12 @@ namespace itsschwer.Items
             });
         }
 
-        private static bool Execute() {
+        private static bool Execute(this EquipmentSlot equipmentSlot) {
+            if (equipmentSlot.characterBody?.inventory) {
+                CharacterMasterNotificationQueue.SendTransformNotification(equipmentSlot.characterBody.master, equipmentSlot.characterBody.inventory.currentEquipmentIndex, DLC1Content.Equipment.BossHunterConsumed.equipmentIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+                equipmentSlot.characterBody.inventory.SetEquipmentIndex(DLC1Content.Equipment.BossHunterConsumed.equipmentIndex);
+            }
+
             Chat.SendBroadcastChat(new Chat.SimpleChatMessage {
                 baseToken = nameof(MendConsumed)
             });
