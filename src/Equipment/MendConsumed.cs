@@ -21,6 +21,7 @@ namespace itsschwer.Items
         }
 
         static MendConsumed() {
+            // Base on Trophy Hunter's Tricorn (even though most fields are being overwritten...)
             equipmentDef = ScriptableObject.Instantiate(Addressables.LoadAssetAsync<EquipmentDef>("RoR2/DLC1/BossHunter/BossHunter.asset").WaitForCompletion());
             equipmentDef.name = $"{Plugin.Author}_{nameof(MendConsumed)}";
 
@@ -30,8 +31,8 @@ namespace itsschwer.Items
             equipmentDef.descriptionToken = token + "_DESC";
             equipmentDef.loreToken = "- no lore -"; // token + "_LORE";
 
-            equipmentDef.pickupIconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/Junk/SkullCounter/texBanditCoinIcon.png").WaitForCompletion(); // "RoR2/Base/Common/MiscIcons/texMysteryIcon.png"
-            equipmentDef.pickupModelPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/LunarWings/PickupLunarWings.prefab").WaitForCompletion(); //"RoR2/Base/Mystery/PickupMystery.prefab"
+            equipmentDef.pickupIconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/DLC1/LunarWings/texLunarWingsIcon.png").WaitForCompletion();
+            equipmentDef.pickupModelPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/LunarWings/PickupLunarWings.prefab").WaitForCompletion();
 
             equipmentDef.equipmentIndex = EquipmentIndex.None;
             equipmentDef.requiredExpansion = null;
