@@ -11,7 +11,7 @@ namespace itsschwer.Items
         public const string GUID = Author + ".Items";
         public const string Author = "itsschwer";
         public const string Name = "Items_itsschwer"; // only to satisfy release workflow
-        public const string Version = "0.0.0";
+        public const string Version = "1.0.0";
 
         internal static new BepInEx.Logging.ManualLogSource Logger { get; private set; }
 
