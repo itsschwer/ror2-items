@@ -102,6 +102,10 @@ namespace itsschwer.Items
 
             RestoreConsumedItems(inventory, equipmentSlot.characterBody.master);
 
+            EffectData effectData = new EffectData { origin = equipmentSlot.characterBody.transform.position };
+            effectData.SetNetworkedObjectReference(equipmentSlot.characterBody.gameObject);
+            EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HealingPotionEffect"), effectData, transmit: true);
+
             return true;
         }
 
