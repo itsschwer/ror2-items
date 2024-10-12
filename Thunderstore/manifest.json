@@ -6,6 +6,7 @@
 	"description": "",
 	"dependencies": [
 		"bbepis-BepInExPack-5.4.2117",
-		"RiskofThunder-R2API_Items-1.0.4"
+		"RiskofThunder-R2API_Items-1.0.4",
+		"RiskofThunder-R2API_Language-1.0.1"
 	]
 }

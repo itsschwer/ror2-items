@@ -23,11 +23,12 @@ namespace itsschwer.Items
         static MendConsumed() {
             equipmentDef = ScriptableObject.Instantiate(Addressables.LoadAssetAsync<EquipmentDef>("RoR2/DLC1/BossHunter/BossHunter.asset").WaitForCompletion());
             equipmentDef.name = $"{Plugin.Author}_{nameof(MendConsumed)}";
-            equipmentDef.nameToken = "Replenisher";
-            equipmentDef.pickupToken = "Restores broken, consumed, and empty items. Consumed on use.";
 
-            equipmentDef.descriptionToken = "<style=cIsUtility>Restores</style> broken, consumed, and empty items back into their original forms. Does not affect items that can regenerate. Equipment is <style=cIsUtility>consumed</style> when depleted.";
-            equipmentDef.loreToken = "";
+            string token = $"{Plugin.Author.ToUpperInvariant()}_{nameof(MendConsumed).ToUpperInvariant()}";
+            equipmentDef.nameToken = token + "_NAME";
+            equipmentDef.pickupToken = token + "_PICKUP";
+            equipmentDef.descriptionToken = token + "_DESC";
+            equipmentDef.loreToken = "- no lore -"; // token + "_LORE";
 
             equipmentDef.pickupIconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/Junk/SkullCounter/texBanditCoinIcon.png").WaitForCompletion(); // "RoR2/Base/Common/MiscIcons/texMysteryIcon.png"
             equipmentDef.pickupModelPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/LunarWings/PickupLunarWings.prefab").WaitForCompletion(); //"RoR2/Base/Mystery/PickupMystery.prefab"
@@ -39,6 +40,9 @@ namespace itsschwer.Items
             equipmentDef.cooldown = 15;
 
             ItemAPI.Add(new CustomEquipment(equipmentDef, (ItemDisplayRule[])null));
+            LanguageAPI.Add(equipmentDef.nameToken, "Replenisher");
+            LanguageAPI.Add(equipmentDef.pickupToken, "Restores broken, consumed, and empty items. Consumed on use.");
+            LanguageAPI.Add(equipmentDef.descriptionToken, "<style=cIsUtility>Restores</style> broken, consumed, and empty items back into their original forms. Does not affect items that can regenerate. Equipment is <style=cIsUtility>consumed</style> when depleted.");
             ApplyIL();
         }
 

@@ -3,6 +3,7 @@ using BepInEx;
 namespace itsschwer.Items
 {
     [R2API.Utils.NetworkCompatibility(R2API.Utils.CompatibilityLevel.EveryoneMustHaveMod, R2API.Utils.VersionStrictness.EveryoneNeedSameModVersion)]
+    [BepInDependency(R2API.LanguageAPI.PluginGUID)]
     [BepInDependency(R2API.ItemAPI.PluginGUID)]
     [BepInPlugin(GUID, GUID, Version)]
     public sealed class Plugin : BaseUnityPlugin
