@@ -36,6 +36,8 @@ namespace itsschwer.Items
             equipmentDef.requiredExpansion = null;
             equipmentDef.unlockableDef = null;
 
+            equipmentDef.cooldown = 1;
+
             ItemAPI.Add(new CustomEquipment(equipmentDef, (ItemDisplayRule[])null));
             ApplyIL();
         }
@@ -89,7 +91,7 @@ namespace itsschwer.Items
         }
 
         private static bool Execute(this EquipmentSlot equipmentSlot) {
-            if (equipmentSlot.characterBody?.inventory) {
+            if (equipmentSlot.characterBody?.inventory && equipmentSlot.stock <= 1) {
                 CharacterMasterNotificationQueue.SendTransformNotification(equipmentSlot.characterBody.master, equipmentSlot.characterBody.inventory.currentEquipmentIndex, DLC1Content.Equipment.BossHunterConsumed.equipmentIndex, CharacterMasterNotificationQueue.TransformationType.Default);
                 equipmentSlot.characterBody.inventory.SetEquipmentIndex(DLC1Content.Equipment.BossHunterConsumed.equipmentIndex);
             }
