@@ -7,9 +7,6 @@ to add items that synergise with existing game mechanics, maybe (and without dil
 
 ## additions
 
-### items
-- *wip*
-
 ### equipment
 1. ***Replenisher***
     - 15s cooldown
@@ -29,6 +26,19 @@ to add items that synergise with existing game mechanics, maybe (and without dil
         - Can still be used even if the user does not have any items that can be restored
             - Combined with the low cooldown, it may synergise well with *Bottled Chaos* and *Fuel Cells*
 
+### items
+- *tba*
+<!--
+- void spare drone parts
+    - *mainly because umbra-summoned col. droneman is OP and hard to see; also to add a third void red option*
+    - → railgunner alt utility slow field?
+    - → allies gain a buff ward (similar to celestine?)
+        - *incentivise sticking together; maybe only organic allies?*
+        - which buff?
+            - warbanner?
+            - lifesteal/leech?
+-->
+
 ## notes
-- uses unused game assets for sprites and icons
+- using unused game assets for sprites and icons
     - ∴ the sprite outline for *Replenisher (`MendConsumed`)* suggests that the equipment is Lunar, even though it isn't
