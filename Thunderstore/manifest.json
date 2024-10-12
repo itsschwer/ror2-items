@@ -1,0 +1,11 @@
+﻿{
+	"author": "itsschwer",
+	"name": "Items_itsschwer",
+	"version_number": "0.0.0",
+	"website_url": "https://github.com/itsschwer/",
+	"description": "",
+	"dependencies": [
+		"bbepis-BepInExPack-5.4.2117",
+		"RiskofThunder-R2API_Items-1.0.4"
+	]
+}
