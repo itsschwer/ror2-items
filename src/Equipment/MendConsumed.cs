@@ -24,9 +24,9 @@ namespace itsschwer.Items
             equipmentDef = ScriptableObject.Instantiate(Addressables.LoadAssetAsync<EquipmentDef>("RoR2/DLC1/BossHunter/BossHunter.asset").WaitForCompletion());
             equipmentDef.name = $"{Plugin.Author}_{nameof(MendConsumed)}";
             equipmentDef.nameToken = "Replenisher";
-            equipmentDef.pickupToken = "Restores broke, consumed, and empty items.";
+            equipmentDef.pickupToken = "Restores broken, consumed, and empty items. Consumed on use.";
 
-            equipmentDef.descriptionToken = "";
+            equipmentDef.descriptionToken = "Restores broken, consumed, and empty items back into their original forms. Does not affect items that can regenerate. Equipment is consumed when depleted.";
             equipmentDef.loreToken = "";
 
             equipmentDef.pickupIconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/Junk/SkullCounter/texBanditCoinIcon.png").WaitForCompletion(); // "RoR2/Base/Common/MiscIcons/texMysteryIcon.png"
@@ -91,15 +91,36 @@ namespace itsschwer.Items
         }
 
         private static bool Execute(this EquipmentSlot equipmentSlot) {
-            if (equipmentSlot.characterBody?.inventory && equipmentSlot.stock <= 1) {
+            Inventory inventory = equipmentSlot.characterBody?.inventory;
+            if (!inventory) return false;
+
+            RestoreConsumedItems(inventory, equipmentSlot.characterBody.master);
+
+            // Become consumed when fully depeleted
+            if (equipmentSlot.stock <= 1) {
                 CharacterMasterNotificationQueue.SendTransformNotification(equipmentSlot.characterBody.master, equipmentSlot.characterBody.inventory.currentEquipmentIndex, DLC1Content.Equipment.BossHunterConsumed.equipmentIndex, CharacterMasterNotificationQueue.TransformationType.Default);
                 equipmentSlot.characterBody.inventory.SetEquipmentIndex(DLC1Content.Equipment.BossHunterConsumed.equipmentIndex);
             }
 
-            Chat.SendBroadcastChat(new Chat.SimpleChatMessage {
-                baseToken = nameof(MendConsumed)
-            });
             return true;
+        }
+
+        private static void RestoreConsumedItems(Inventory inventory, CharacterMaster notificationTarget)
+        {
+            (ItemDef consumed, ItemDef original)[] items = {
+                (RoR2Content.Items.ExtraLifeConsumed, RoR2Content.Items.ExtraLife),
+                (DLC1Content.Items.ExtraLifeVoidConsumed, (inventory.GetItemCount(RoR2Content.Items.ExtraLifeConsumed) > 0 ? RoR2Content.Items.ExtraLife : DLC1Content.Items.ExtraLifeVoid)),
+                (DLC1Content.Items.FragileDamageBonusConsumed, DLC1Content.Items.FragileDamageBonus),
+                (DLC1Content.Items.HealingPotionConsumed, DLC1Content.Items.HealingPotion),
+                (RoR2Content.Items.TonicAffliction, null)
+            };
+
+            for (int i = 0; i < items.Length; i++) {
+                int count = inventory.GetItemCount(items[i].consumed);
+                inventory.RemoveItem(items[i].consumed);
+                inventory.GiveItem(items[i].original, count);
+                CharacterMasterNotificationQueue.SendTransformNotification(notificationTarget, items[i].consumed.itemIndex, items[i].original.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+            }
         }
     }
 }
