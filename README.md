@@ -24,7 +24,10 @@ to add items that synergise with existing game mechanics, maybe (and without dil
     - *Notes:*
         - Essentially a variation of the *Recycler* and the *Trophy Hunter's Tricorn*
         - Can still be used even if the user does not have any items that can be restored
-            - Combined with the low cooldown, it may synergise well with *Bottled Chaos* and *Fuel Cells*
+        - *Strategies:*
+            - Given the low cooldown, it may synergise well with *Fuel Cells* to proc items that trigger on equipment activation (*War Horn*, *Bottled Chaos*)
+            - Since the equipment only transforms when all charges are depleted, *Fuel Cells* may enable the user to effectively become immortal by allowing them to repeatedly restore *Dio's Best Friend* as soon as they revive
+                - This comes at the cost of not being able to carry other equipment across stages
 
 ### items
 - *tba*
