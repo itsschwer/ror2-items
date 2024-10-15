@@ -1,7 +1,7 @@
 ﻿{
 	"author": "itsschwer",
-	"name": "Items_itsschwer",
-	"version_number": "1.0.0",
+	"name": "items_from_itsschwer",
+	"version_number": "1.0.1",
 	"website_url": "https://github.com/itsschwer/ror2-items",
 	"description": "Adds a new equipment \"Replenisher\" — [ content mod (tiny) ]",
 	"dependencies": [
