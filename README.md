@@ -40,6 +40,10 @@ to add items that synergise with existing game mechanics, maybe (and without dil
         - which buff?
             - warbanner?
             - lifesteal/leech?
+- consumable (green?) — retaliation
+    - on low health, trigger your on-kill effects at your location
+        - *enable using on-kill effects against bosses*
+        - *synergy with Replenisher*
 -->
 
 ## notes
