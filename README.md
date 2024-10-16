@@ -52,5 +52,5 @@ to add items that synergise with existing game mechanics, maybe (and without dil
 -->
 
 ## notes
-- using unused game assets for sprites and icons
+- using unused game assets for models and icons
     - ∴ the sprite outline for *Replenisher* suggests that the equipment is Lunar, even though it isn't
