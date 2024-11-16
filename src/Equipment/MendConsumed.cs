@@ -1,10 +1,12 @@
-﻿using Mono.Cecil;
+﻿using itsschwer.Items.Helpers;
+using Mono.Cecil;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
 using R2API;
 using RoR2;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -119,20 +121,14 @@ namespace itsschwer.Items
 
         private static void RestoreConsumedItems(Inventory inventory, CharacterMaster notificationTarget)
         {
-            (ItemDef consumed, ItemDef original)[] items = {
-                (RoR2Content.Items.ExtraLifeConsumed, RoR2Content.Items.ExtraLife),
-                (DLC1Content.Items.ExtraLifeVoidConsumed, (inventory.GetItemCount(RoR2Content.Items.ExtraLifeConsumed) > 0 ? RoR2Content.Items.ExtraLife : DLC1Content.Items.ExtraLifeVoid)),
-                (DLC1Content.Items.FragileDamageBonusConsumed, DLC1Content.Items.FragileDamageBonus),
-                (DLC1Content.Items.HealingPotionConsumed, DLC1Content.Items.HealingPotion),
-                (RoR2Content.Items.TonicAffliction, null)
-            };
-
-            for (int i = 0; i < items.Length; i++) {
-                int count = inventory.GetItemCount(items[i].consumed);
-                inventory.RemoveItem(items[i].consumed, count);
-                if (items[i].original) {
-                    inventory.GiveItem(items[i].original, count);
-                    if (count > 0) CharacterMasterNotificationQueue.SendTransformNotification(notificationTarget, items[i].consumed.itemIndex, items[i].original.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+            IList<IReplenishTransformation> transformations = MendConsumedTransformations.transformations;
+            for (int i = 0; i < transformations.Count; i++) {
+                int count = inventory.GetItemCount(transformations[i].Consumed);
+                inventory.RemoveItem(transformations[i].Consumed, count);
+                ItemDef transformed = transformations[i].GetTransformation(inventory);
+                if (transformed) {
+                    inventory.GiveItem(transformed, count);
+                    if (count > 0) CharacterMasterNotificationQueue.SendTransformNotification(notificationTarget, transformations[i].Consumed.itemIndex, transformed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
                 }
             }
         }
