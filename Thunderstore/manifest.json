@@ -1,9 +1,9 @@
 ﻿{
 	"author": "itsschwer",
 	"name": "items_from_itsschwer",
-	"version_number": "1.0.1",
+	"version_number": "1.1.0",
 	"website_url": "https://github.com/itsschwer/ror2-items",
-	"description": "Adds a new equipment \"Replenisher\" — [ content mod (tiny) ]",
+	"description": "Adds a new equipment \"Replenisher\" — now with API — [ content mod (tiny) ]",
 	"dependencies": [
 		"bbepis-BepInExPack-5.4.2117",
 		"RiskofThunder-R2API_Items-1.0.4",

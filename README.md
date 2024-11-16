@@ -51,6 +51,15 @@ to add items that synergise with existing game mechanics, maybe (and without dil
         - *synergy with Replenisher*
 -->
 
+## api
+- Use `itsschwer.Items.MendConsumedTransformations.Register()` to add additional transformations to this mod's [*Replenisher*](#replenisher) equipment
+    - *e.g. for [**SivsContentPack**](https://thunderstore.io/package/Sivelos1/SivsContentPack/)*
+      ```cs
+      itsschwer.Items.MendConsumedTransformations.Register(new ReplenishTransformation(SivsItems.GlassShieldBroken, SivsItems.GlassShield));
+
+      itsschwer.Items.MendConsumedTransformations.Register(new ReplenishTransformation(SivsItems.DropYellowItemOnKillUsed, SivsItems.DropYellowItemOnKill));
+      ```
+
 ## notes
 - using unused game assets for models and icons
     - ∴ the sprite outline for *Replenisher* suggests that the equipment is Lunar, even though it isn't
