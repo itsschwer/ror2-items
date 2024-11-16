@@ -21,6 +21,7 @@ namespace itsschwer.Items
             Logger = base.Logger;
 
             MendConsumed.Init();
+            RoR2.RoR2Application.onLoad += MendConsumedTransformations.Init;
 
             Logger.LogMessage("~awake.");
         }

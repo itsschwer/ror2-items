@@ -8,13 +8,22 @@ namespace itsschwer.Items
 {
     public static class MendConsumedTransformations
     {
-        internal static readonly List<IReplenishTransformation> transformations = [
-            new ReplenishTransformation(BaseItems.ExtraLifeConsumed, BaseItems.ExtraLife),
-            new ConditionalReplenishTransformation(DLC1Items.ExtraLifeVoidConsumed, DLC1Items.ExtraLifeVoid, BaseItems.ExtraLife, (inventory) => inventory.GetItemCount(BaseItems.ExtraLifeConsumed) > 0),
-            new ReplenishTransformation(DLC1Items.FragileDamageBonusConsumed, DLC1Items.FragileDamageBonus),
-            new ReplenishTransformation(DLC1Items.HealingPotionConsumed, DLC1Items.HealingPotion),
-            new ReplenishTransformation(BaseItems.TonicAffliction, null)
-        ];
+        internal static List<IReplenishTransformation> transformations = new List<IReplenishTransformation>();
+
+        internal static void Init()
+        {
+            List<IReplenishTransformation> _transformations = [
+                new ReplenishTransformation(BaseItems.ExtraLifeConsumed, BaseItems.ExtraLife),
+                new ConditionalReplenishTransformation(DLC1Items.ExtraLifeVoidConsumed, DLC1Items.ExtraLifeVoid, BaseItems.ExtraLife, (inventory) => inventory.GetItemCount(BaseItems.ExtraLifeConsumed) > 0),
+                new ReplenishTransformation(DLC1Items.FragileDamageBonusConsumed, DLC1Items.FragileDamageBonus),
+                new ReplenishTransformation(DLC1Items.HealingPotionConsumed, DLC1Items.HealingPotion),
+                new ReplenishTransformation(BaseItems.TonicAffliction, null)
+            ];
+
+            // Mods that register additional transformations with the same consumed items won't be removed!
+            _transformations.AddRange(transformations);
+            transformations = _transformations;
+        }
 
         public static bool Register(IReplenishTransformation transformation)
         {
