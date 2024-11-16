@@ -1,4 +1,5 @@
 ﻿using itsschwer.Items.Helpers;
+using RoR2;
 using System.Collections.Generic;
 using BaseItems = RoR2.RoR2Content.Items;
 using DLC1Items = RoR2.DLC1Content.Items;
@@ -8,7 +9,7 @@ namespace itsschwer.Items
 {
     public static class MendConsumedTransformations
     {
-        internal static List<IReplenishTransformation> transformations = new List<IReplenishTransformation>();
+        private static List<IReplenishTransformation> transformations = new List<IReplenishTransformation>();
 
         internal static void Init()
         {
@@ -23,6 +24,14 @@ namespace itsschwer.Items
             // Mods that register additional transformations with the same consumed items won't be removed!
             _transformations.AddRange(transformations);
             transformations = _transformations;
+        }
+
+        public static (ItemDef consumed, ItemDef original)[] GetTransformations(Inventory inventory)
+        {
+            (ItemDef consumed, ItemDef original)[] result = new (ItemDef consumed, ItemDef original)[transformations.Count];
+            for (int i = 0; i < transformations.Count; i++)
+                result[i] = (transformations[i].Consumed, transformations[i].GetTransformation(inventory));
+            return result;
         }
 
         public static bool Register(IReplenishTransformation transformation)

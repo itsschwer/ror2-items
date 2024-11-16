@@ -1,12 +1,10 @@
-﻿using itsschwer.Items.Helpers;
-using Mono.Cecil;
+﻿using Mono.Cecil;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
 using R2API;
 using RoR2;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -121,14 +119,13 @@ namespace itsschwer.Items
 
         private static void RestoreConsumedItems(Inventory inventory, CharacterMaster notificationTarget)
         {
-            IList<IReplenishTransformation> transformations = MendConsumedTransformations.transformations;
-            for (int i = 0; i < transformations.Count; i++) {
-                int count = inventory.GetItemCount(transformations[i].Consumed);
-                inventory.RemoveItem(transformations[i].Consumed, count);
-                ItemDef transformed = transformations[i].GetTransformation(inventory);
-                if (transformed) {
-                    inventory.GiveItem(transformed, count);
-                    if (count > 0) CharacterMasterNotificationQueue.SendTransformNotification(notificationTarget, transformations[i].Consumed.itemIndex, transformed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+            (ItemDef consumed, ItemDef original)[] transformations = MendConsumedTransformations.GetTransformations(inventory);
+            for (int i = 0; i < transformations.Length; i++) {
+                int count = inventory.GetItemCount(transformations[i].consumed);
+                inventory.RemoveItem(transformations[i].consumed, count);
+                if (transformations[i].original) {
+                    inventory.GiveItem(transformations[i].original, count);
+                    if (count > 0) CharacterMasterNotificationQueue.SendTransformNotification(notificationTarget, transformations[i].consumed.itemIndex, transformations[i].original.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
                 }
             }
         }
